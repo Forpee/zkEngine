@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>zkWasm test</title>
+  <script type="module">
+    import init from './pkg/zkEngine.js';
+
+    const runWasm = async () => {
+      const wasmModule = await init('./pkg/zkEngine_bg.wasm');
+      const result = wasmModule.read_files();
+    };
+    runWasm();
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
