@@ -18,10 +18,10 @@ Make sure you have the following installed:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/your-project.git
+git clone https://github.com/Forpee/zkEngine
 
 # Navigate into the project directory
-cd your-project
+cd zkEngine
 
 # Initialize and update the submodule
 git submodule init
