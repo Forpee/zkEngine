@@ -34,4 +34,11 @@ wasm-pack build --target web
 
 1. Open `index.html` with your preferred method to serve HTML locally. If you're using VS Code, you can use the Live Server extension.
 
-2. Check the console in your browser to see the log of the execution trace.
+2. Enter the functions name in the "Function Name" input.
+
+3. Enter the function's arguments separated by commas. For example, if your function is `add` and is typically called like `add(2, 4)`, you would input `2,4` in the input.
+
+4. Click the "Choose File" button/input. Do this last as it triggers the `onchange` function. If you select a file first without entering the function name and arguments, it won't run.
+
+Once the file is selected, you should see the execution trace of that WebAssembly (Wasm) file in the console.
+

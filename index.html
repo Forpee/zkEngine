@@ -6,18 +6,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>zkWasm test</title>
   <script type="module">
-    import init from './pkg/zkEngine.js';
+    import init, { read_files } from './pkg/zkEngine.js';
+    init('/pkg/zkEngine_bg.wasm').then(() => {
 
-    const runWasm = async () => {
-      const wasmModule = await init('./pkg/zkEngine_bg.wasm');
-      const result = wasmModule.read_files();
-    };
-    runWasm();
+      function readFile() {
+        let input = document.querySelector("#wasm-file");
+
+        // Get values from input fields
+        var fName = document.getElementById('nameInput').value;
+        var argsString = document.getElementById('argsInput').value;
+
+        // Split the comma-separated numbers into an array
+        var argsArr = argsString.split(',').map(Number);
+
+        let file = input.files[0];
+        let reader = new FileReader();
+
+        reader.onload = async function () {
+          await init();
+          let arrayBuffer = this.result;
+          let array = new Uint8Array(arrayBuffer);
+          let result = read_files(array, fName, argsArr);
+          console.log(result);
+        };
+
+        reader.readAsArrayBuffer(file);
+      }
+
+      window.readFile = readFile;
+
+    }).catch((error) => {
+      console.error("Error during initialization:", error);
+    });
   </script>
 </head>
 
 <body>
+  <label for="nameInput">Function Name:</label>
+  <input type="text" id="nameInput" placeholder="Enter function name">
 
+  <br>
+
+  <label for="argsInput">Arguments (comma-separated):</label>
+  <input type="text" id="argsInput" placeholder="Enter args">
+
+  <br>
+  <input id="wasm-file" type="file" onchange="readFile()" />
 </body>
 
 </html>
