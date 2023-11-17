@@ -42,3 +42,19 @@ wasm-pack build --target web
 
 Once the file is selected, you should see the execution trace of that WebAssembly (Wasm) file in the console.
 
+### Example
+
+In the `test` folder, you'll find two wasm files. You can inspect what the wat looks like at [WebAssembly Explorer](https://webassembly.github.io/wabt/demo/wasm2wat/) to see the function argumets to input. Here are example inputs for the provided wasm files:
+
+#### `add.wasm` Example:
+
+- Function Name: 'add'
+- Arguments: 2,4
+- Selected File: add.wasm
+
+#### `fibonacci.wasm` Example:
+
+- Function Name: 'fibonacci'
+- Arguments: 10
+- Selected File: fibonacci.wasm
+
