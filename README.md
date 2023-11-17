@@ -44,7 +44,7 @@ Once the file is selected, you should see the execution trace of that WebAssembl
 
 ### Example
 
-In the `test` folder, you'll find two wasm files. You can inspect what the wat looks like at [WebAssembly Explorer](https://webassembly.github.io/wabt/demo/wasm2wat/) to see the function argumets to input. Here are example inputs for the provided wasm files:
+In the `test` folder, you'll find two wasm files. You can inspect what the wat looks like at [wasm2wat](https://webassembly.github.io/wabt/demo/wasm2wat/) to see the function argumets to input. Here are example inputs for the provided wasm files:
 
 #### `add.wasm` Example:
 
