@@ -27,6 +27,9 @@
           let arrayBuffer = this.result;
           let array = new Uint8Array(arrayBuffer);
           let result = read_files(array, fName, argsArr);
+          /**
+           * Log
+           **/
           console.log(result);
         };
 

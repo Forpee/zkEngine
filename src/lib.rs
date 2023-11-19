@@ -3,24 +3,25 @@ extern crate wasmi;
 use core::cell::RefCell;
 use std::rc::Rc;
 use wasm_bindgen::prelude::*;
+use std::collections::HashMap;
 use wasmi::{ImportsBuilder, ModuleInstance, NopExternals, RuntimeValue};
 
 #[wasm_bindgen]
 pub fn read_files(wasm_mod: &[u8], f_name: &str, args: Vec<i32>) -> String {
-    let mut tracer = wasmi::tracer::Tracer::default();
+    
+    let test_phantom_vec: Vec<String> = Vec::new();
+    let tracer = wasmi::tracer::Tracer::new(HashMap::default(),&test_phantom_vec );
 
     // Load wasm binary and prepare it for instantiation.
     let module = wasmi::Module::from_buffer(&wasm_mod).unwrap();
 
     // Instantiate a module with empty imports and
     // asserting that there is no `start` function.
-    let instance = ModuleInstance::new(&module, &ImportsBuilder::default())
-        .expect("failed to instantiate wasm module")
-        .run_start(&mut NopExternals)
-        .unwrap();
-
-    tracer.register_module_instance(&instance);
     let tracer = Rc::new(RefCell::new(tracer));
+    let instance = ModuleInstance::new(&module, &ImportsBuilder::default(), Some(tracer.clone()))
+        .expect("failed to instantiate wasm module")
+        .assert_no_start();
+
 
     instance
         .invoke_export_trace(
