@@ -15,9 +15,11 @@
         // Get values from input fields
         var fName = document.getElementById('nameInput').value;
         var argsString = document.getElementById('argsInput').value;
+        var argsTypesString = document.getElementById('argsTypes').value;
 
         // Split the comma-separated numbers into an array
         var argsArr = argsString.split(',').map(Number);
+        var argsTypesArr = argsTypesString.split(',');
 
         let file = input.files[0];
         let reader = new FileReader();
@@ -26,7 +28,7 @@
           await init();
           let arrayBuffer = this.result;
           let array = new Uint8Array(arrayBuffer);
-          let result = read_files(array, fName, argsArr);
+          let result = read_files(array, fName, argsArr, argsTypesArr);
           /**
            * Log
            **/
@@ -52,6 +54,11 @@
 
   <label for="argsInput">Arguments (comma-separated):</label>
   <input type="text" id="argsInput" placeholder="Enter args">
+
+  <br>
+
+  <label for="argsTypes">Argument types (comma-separated):</label>
+  <input type="text" id="argsTypes" placeholder="Enter argument types">
 
   <br>
   <input id="wasm-file" type="file" onchange="readFile()" />
