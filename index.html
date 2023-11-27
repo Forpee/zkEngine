@@ -2,9 +2,82 @@
 <html lang="en">
 
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>zkWasm test</title>
+  <title>zkWasm Test</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    #wasm-file {
+      display: none;
+    }
+
+    #file-label {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    #file-label:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+
+<body>
+  <form>
+    <label for="nameInput">Function Name:</label>
+    <input type="text" id="nameInput" placeholder="Enter function name">
+
+    <label for="argsInput">Arguments (comma-separated):</label>
+    <div id="argsContainer">
+      <input type="text" class="argsInput" id="argsInput" placeholder="Enter args">
+    </div>
+
+    <label for="argsTypes">Argument types (comma-separated):</label>
+    <input type="text" id="argsTypes" placeholder="Enter argument types">
+
+    <label for="wasm-file" id="file-label">Choose a WebAssembly File</label>
+    <input id="wasm-file" type="file" onchange="readFile()" />
+  </form>
+
   <script type="module">
     import init, { read_files } from './pkg/zkEngine.js';
     init('/pkg/zkEngine_bg.wasm').then(() => {
@@ -44,24 +117,6 @@
       console.error("Error during initialization:", error);
     });
   </script>
-</head>
-
-<body>
-  <label for="nameInput">Function Name:</label>
-  <input type="text" id="nameInput" placeholder="Enter function name">
-
-  <br>
-
-  <label for="argsInput">Arguments (comma-separated):</label>
-  <input type="text" id="argsInput" placeholder="Enter args">
-
-  <br>
-
-  <label for="argsTypes">Argument types (comma-separated):</label>
-  <input type="text" id="argsTypes" placeholder="Enter argument types">
-
-  <br>
-  <input id="wasm-file" type="file" onchange="readFile()" />
 </body>
 
 </html>
